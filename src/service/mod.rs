@@ -303,7 +303,7 @@ fn locast_stations(dma: &str, days: u8, token: &str) -> Vec<Station> {
         start_time,
         days * 24
     );
-    crate::utils::get(&uri, Some(token))
+    crate::utils::get(&uri, Some(token), false)
         .json::<Vec<Station>>()
         .unwrap()
 }
@@ -336,7 +336,7 @@ impl From<&Option<String>> for Geo {
             None => String::from(IP_URL),
         };
 
-        let mut geo = crate::utils::get(&uri, None).json::<Geo>().unwrap();
+        let mut geo = crate::utils::get(&uri, None, false).json::<Geo>().unwrap();
         geo.timezone = Some(tz_search::lookup(geo.latitude, geo.longitude).unwrap());
         geo
     }

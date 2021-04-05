@@ -88,7 +88,7 @@ struct UserInfo {
 // Validate the locast user and make sure the user has donated and the donation didn't expire.
 // If invalid, panic.
 fn validate_user(token: &str) {
-    let user_info: UserInfo = crate::utils::get(USER_URL, Some(token)).json().unwrap();
+    let user_info: UserInfo = crate::utils::get(USER_URL, Some(token), false).json().unwrap();
     let now = Utc::now().timestamp();
     if user_info.didDonate && now > user_info.donationExpire / 1000 {
         panic!("Donation expired!")

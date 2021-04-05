@@ -109,7 +109,7 @@ fn load<'a>(cache_file: &PathBuf) -> HashMap<(i64, String), (String, String)> {
     let reader: Box<dyn Read>;
 
     // First get the locast_dmas from locast.org
-    let locast_dmas: Vec<LocastDMA> = crate::utils::get(DMA_URL, None).json().unwrap();
+    let locast_dmas: Vec<LocastDMA> = crate::utils::get(DMA_URL, None, false).json().unwrap();
 
     // Using cached facilities if possible.
     let downloaded = if cache_file.exists() && !path_expired(&cache_file) {
@@ -118,7 +118,9 @@ fn load<'a>(cache_file: &PathBuf) -> HashMap<(i64, String), (String, String)> {
         false
     } else {
         info!("Downloading FCC facilities");
-        let zipfile = crate::utils::get(FACILITIES_URL, None).bytes().unwrap();
+        let zipfile = crate::utils::get(FACILITIES_URL, None, true)
+            .bytes()
+            .unwrap();
         zip = zip::ZipArchive::new(std::io::Cursor::new(zipfile)).unwrap();
         reader = Box::new(zip.by_name("facility.dat").unwrap());
         true

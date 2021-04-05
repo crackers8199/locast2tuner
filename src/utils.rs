@@ -13,17 +13,24 @@ pub trait Or {
 }
 
 /// HTTP Get (blocking). A token is optional, but should be used for authenticated requests
-pub fn get(uri: &str, token: Option<&str>) -> Response {
-    let mut client = reqwest::blocking::Client::new()
-        .get(uri)
-        .headers(construct_headers());
-
-    client = match token {
-        Some(t) => client.header("authorization", format!("Bearer {}", t)),
-        None => client,
+pub fn get(uri: &str, token: Option<&str>, accept_invalid_certs: bool) -> Response {
+    let client = if accept_invalid_certs {
+        reqwest::blocking::ClientBuilder::default()
+            .danger_accept_invalid_certs(true)
+            .build()
+            .unwrap()
+    } else {
+        reqwest::blocking::Client::new()
     };
 
-    let resp = client.send().unwrap();
+    let mut req = client.get(uri).headers(construct_headers());
+
+    req = match token {
+        Some(t) => req.header("authorization", format!("Bearer {}", t)),
+        None => req,
+    };
+
+    let resp = req.send().unwrap();
     if !resp.status().is_success() {
         panic!("Fetching {} failed: {:?}", uri, resp)
     }
