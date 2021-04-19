@@ -77,3 +77,13 @@ pub struct Listing {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub videoProperties: Option<String>,
 }
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+pub struct ChannelRemapEntry {
+    pub original_call_sign: String,
+    pub remap_call_sign: String,
+    pub original_channel: String,
+    pub remap_channel: String,
+    pub city: String,
+    pub active: bool,
+}
