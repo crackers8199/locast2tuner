@@ -78,11 +78,7 @@ impl StationProvider for Arc<Multiplexer> {
                         panic!("Could not remap {}", channel);
                     };
 
-                    // Convoluted.. let's fix this sometime..
-                    let new_call_sign = station
-                        .callSign
-                        .replace(channel, &station.channel_remapped.as_ref().unwrap());
-                    station.callSign_remapped = Some(new_call_sign);
+                    station.callSign_remapped = Some(station.callSign.clone());
                     station.remapped = Some(true)
                 } else if self.channel_remap.is_some() {
                     // Look if the channel is is remapped in the channel map
