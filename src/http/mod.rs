@@ -341,13 +341,13 @@ async fn map_json<T: 'static + StationProvider>(req: HttpRequest) -> HttpRespons
                     remap_call_sign: station
                         .callSign_remapped
                         .clone()
-                        .or(Some("".to_string()))
+                        .or(Some(station.callSign.clone()))
                         .unwrap(),
                     original_channel: station.channel.clone().unwrap(),
                     remap_channel: station
                         .channel_remapped
                         .clone()
-                        .or(Some("".to_string()))
+                        .or(Some(station.channel.clone().unwrap()))
                         .unwrap(),
                     city: station.city.clone().unwrap(),
                     active: station.active,

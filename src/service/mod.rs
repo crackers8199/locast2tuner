@@ -299,9 +299,7 @@ async fn build_stations(
             detect_callsign(&station.name).or(detect_callsign(&station.callSign))
         {
             let dma = geo.DMA.parse::<i64>().unwrap();
-            let channel = fcc_facilities.lookup(dma, call_sign, sub_channel).await;
-
-            Some(channel)
+            Some(fcc_facilities.lookup(dma, call_sign, sub_channel).await)
         } else {
             panic!(
                 "Channel {}, call sign: {} not found!",
