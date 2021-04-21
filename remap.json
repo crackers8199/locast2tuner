@@ -5,7 +5,8 @@
         "original_channel": "3.1",
         "remap_channel": "3",
         "active": true,
-        "city": "Phoenix"
+        "city": "Phoenix",
+        "remapped": true
     },
     "channel.1571434910374": {
         "original_call_sign": "CBS",
@@ -13,7 +14,8 @@
         "original_channel": "5.1",
         "remap_channel": "5.1",
         "active": true,
-        "city": "Phoenix"
+        "city": "Phoenix",
+        "remapped": true
     },
     "channel.1571434911228": {
         "original_call_sign": "PBS",
@@ -21,7 +23,8 @@
         "original_channel": "8.1",
         "remap_channel": "9.1",
         "active": true,
-        "city": "Phoenix"
+        "city": "Phoenix",
+        "remapped": true
     },
     "channel.1571434911800": {
         "original_call_sign": "FOX",
@@ -29,7 +32,8 @@
         "original_channel": "10.1",
         "remap_channel": "7.1",
         "active": true,
-        "city": "Phoenix"
+        "city": "Phoenix",
+        "remapped": true
     },
     "channel.1571434912373": {
         "original_call_sign": "NBC",
@@ -37,7 +41,8 @@
         "original_channel": "12.1",
         "remap_channel": "6.1",
         "active": true,
-        "city": "Phoenix"
+        "city": "Phoenix",
+        "remapped": true
     },
     "channel.1571434913084": {
         "original_call_sign": "ABC",
@@ -45,7 +50,8 @@
         "original_channel": "15.1",
         "remap_channel": "4.1",
         "active": true,
-        "city": "Phoenix"
+        "city": "Phoenix",
+        "remapped": true
     },
     "channel.1571434913506": {
         "original_call_sign": "COURT",
@@ -53,7 +59,8 @@
         "original_channel": "15.4",
         "remap_channel": "145.1",
         "active": false,
-        "city": "Phoenix"
+        "city": "Phoenix",
+        "remapped": true
     },
     "channel.1571434916392": {
         "original_call_sign": "CW",
@@ -61,6 +68,7 @@
         "original_channel": "61.1",
         "remap_channel": "8.1",
         "active": true,
-        "city": "Phoenix"
+        "city": "Phoenix",
+        "remapped": true
     }
 }

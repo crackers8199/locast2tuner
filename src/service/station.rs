@@ -23,6 +23,7 @@ pub struct Station {
     pub transcodeId: i64,
     pub channel_remapped: Option<String>,
     pub callSign_remapped: Option<String>,
+    pub remapped: Option<bool>,
 }
 pub type Stations = Arc<Mutex<Vec<Station>>>;
 
@@ -86,4 +87,5 @@ pub struct ChannelRemapEntry {
     pub remap_channel: String,
     pub city: String,
     pub active: bool,
+    pub remapped: bool,
 }

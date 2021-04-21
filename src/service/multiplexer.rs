@@ -83,16 +83,18 @@ impl StationProvider for Arc<Multiplexer> {
                         .callSign
                         .replace(channel, &station.channel_remapped.as_ref().unwrap());
                     station.callSign_remapped = Some(new_call_sign);
+                    station.remapped = Some(true)
                 } else if self.channel_remap.is_some() {
                     // Look if the channel is is remapped in the channel map
                     let channel_remap = self.channel_remap.as_ref().unwrap();
                     let key = format!("channel.{}", station.id);
                     match channel_remap.get(&key) {
-                        Some(r) => {
+                        Some(r) if r.remapped => {
                             station.channel_remapped = Some(r.remap_channel.clone());
                             station.callSign_remapped =
                                 Some(format!("{} {}", r.remap_channel, r.remap_call_sign));
                             station.active = r.active;
+                            station.remapped = Some(r.remapped);
                             debug!(
                                 "Remap -  {} {} => {} {}",
                                 station.channel.clone().unwrap(),

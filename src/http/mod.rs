@@ -353,6 +353,7 @@ async fn map_json<T: 'static + StationProvider>(req: HttpRequest) -> HttpRespons
                         .unwrap(),
                     city: station.city.clone().unwrap(),
                     active: station.active,
+                    remapped: station.remapped.or(Some(false)).unwrap()
                 },
             )
         })
