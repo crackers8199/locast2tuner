@@ -250,12 +250,10 @@ async fn tuner_m3u<T: 'static + StationProvider>(req: HttpRequest) -> HttpRespon
 
     for station in stations.lock().await.iter().filter(|s| s.active) {
         let call_sign_or_name = &station.callSign.or(&station.name).to_string();
-        let call_sign = crate::utils::name_only(
-            &station
-                .callSign_remapped
-                .as_ref()
-                .unwrap_or(call_sign_or_name),
-        );
+        let call_sign = station
+            .callSign_remapped
+            .as_ref()
+            .unwrap_or(call_sign_or_name);
         let city = station.city.as_ref().unwrap();
         let logo = &station
             .logoUrl
@@ -266,7 +264,7 @@ async fn tuner_m3u<T: 'static + StationProvider>(req: HttpRequest) -> HttpRespon
             .channel_remapped
             .as_ref()
             .unwrap_or(station.channel.as_ref().unwrap());
-        let groups = if NETWORKS.contains(&call_sign) {
+        let groups = if NETWORKS.contains(&call_sign.as_str()) {
             format!("{};Network", &city,)
         } else {
             city.to_owned()
@@ -353,7 +351,7 @@ async fn map_json<T: 'static + StationProvider>(req: HttpRequest) -> HttpRespons
                         .unwrap(),
                     city: station.city.clone().unwrap(),
                     active: station.active,
-                    remapped: station.remapped.or(Some(false)).unwrap()
+                    remapped: station.remapped.or(Some(false)).unwrap(),
                 },
             )
         })

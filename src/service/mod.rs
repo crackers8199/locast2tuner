@@ -309,6 +309,8 @@ async fn build_stations(
             );
         };
         station.channel = c;
+        // Rewrite the callsign to remove the channel number
+        station.callSign = crate::utils::name_only(&station.callSign).to_string();
         stations.push(station);
     }
     stations

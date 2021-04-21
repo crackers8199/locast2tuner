@@ -3,7 +3,6 @@ use crate::utils::format_date;
 use crate::utils::format_date_iso;
 use crate::utils::format_time;
 use crate::utils::format_time_local_iso;
-use crate::utils::name_only;
 use crate::utils::quality;
 use crate::utils::split;
 use crate::{config::Config, service::station::Station, service::stationprovider::StationProvider};
@@ -56,8 +55,8 @@ pub fn epg_xml(stations: &Vec<Station>) -> String {
         <tv generator-info-name="locast2tuner">
         for station in (stations.iter().filter(|s| s.active)) {
             <channel id={format!("channel.{}",station.id)}>
-                <display-name lang="en">{encode_minimal(name_only(&station.callSign_remapped.as_ref().unwrap_or(&station.callSign)))}</display-name>
                 <display-name lang="en">{encode_minimal(&station.callSign_remapped.as_ref().unwrap_or(&station.callSign))}</display-name>
+                <display-name lang="en">{format!("{} {}", encode_minimal(&station.channel_remapped.as_ref().unwrap_or(&station.channel.as_ref().unwrap())), encode_minimal(&station.callSign_remapped.as_ref().unwrap_or(&station.callSign)))}</display-name>
                 <display-name lang="en">{encode_minimal(&station.name)}</display-name>
                 <display-name lang="en">{encode_minimal(&station.channel_remapped.as_ref().unwrap_or(&station.channel.as_ref().unwrap()))}</display-name>
                 <display-name lang="en">{station.id}</display-name>

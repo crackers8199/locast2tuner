@@ -91,8 +91,7 @@ impl StationProvider for Arc<Multiplexer> {
                     match channel_remap.get(&key) {
                         Some(r) if r.remapped => {
                             station.channel_remapped = Some(r.remap_channel.clone());
-                            station.callSign_remapped =
-                                Some(format!("{} {}", r.remap_channel, r.remap_call_sign));
+                            station.callSign_remapped = Some(r.remap_call_sign.clone());
                             station.active = r.active;
                             station.remapped = Some(r.remapped);
                             debug!(
