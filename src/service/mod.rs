@@ -155,7 +155,7 @@ impl StationProvider for LocastServiceArc {
                 mp.variant_streams,
                 &stream_url,
             ))),
-            Err(_) => Ok(Mutex::new(&stream_url.to_owned())),
+            Err(_) => Ok(Mutex::new(stream_url.to_owned())),
         }
     }
 
