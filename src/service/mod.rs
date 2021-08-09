@@ -139,8 +139,8 @@ impl StationProvider for LocastServiceArc {
 
         let value: HashMap<String, Value> = response.json().await.unwrap();
 
-        let stream_url = value.get("streamUrl").unwrap().as_str().unwrap();
-        let m3u_data = get(stream_url, None, 100)
+        let stream_url = value.get("streamUrl").unwrap().as_str().unwrap().replace("hls.locastnet", "lax.locastnet");
+        let m3u_data = get(&stream_url, None, 100)
             .await
             .unwrap()
             .text()
@@ -153,9 +153,9 @@ impl StationProvider for LocastServiceArc {
         match master_playlist {
             Ok(mp) => Ok(Mutex::new(highest_quality_url(
                 mp.variant_streams,
-                stream_url,
+                &stream_url,
             ))),
-            Err(_) => Ok(Mutex::new(stream_url.to_owned())),
+            Err(_) => Ok(Mutex::new(&stream_url.to_owned())),
         }
     }
 
